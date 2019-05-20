@@ -1,0 +1,7 @@
+github "RxSwiftCommunity/RxFlow" == 2.3.0
+github "ReactiveX/RxSwift" == 5.0.1
+github "twittemb/RxLoop" "develop"
+github "AliSoftware/Reusable"
+github "Alamofire/Alamofire"
+github "Alamofire/AlamofireImage"
+github "Swinject/Swinject" ~> 2.6

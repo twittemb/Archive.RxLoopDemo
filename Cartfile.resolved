@@ -1,0 +1,7 @@
+github "Alamofire/Alamofire" "4.8.2"
+github "Alamofire/AlamofireImage" "3.5.2"
+github "AliSoftware/Reusable" "4.1.0"
+github "ReactiveX/RxSwift" "5.0.1"
+github "RxSwiftCommunity/RxFlow" "2.3.0"
+github "Swinject/Swinject" "2.6.0"
+github "twittemb/RxLoop" "b509e6433f4d6aaa3d387d96a634f63229d6f55b"
