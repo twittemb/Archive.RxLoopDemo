@@ -10,5 +10,6 @@ import RxFlow
 
 enum AppStep: Step {
     case movieList
-    case movieDetail
+    case movieDetail(id: Int)
+    case movieDetailDone
 }

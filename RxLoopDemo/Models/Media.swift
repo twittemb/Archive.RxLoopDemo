@@ -21,3 +21,4 @@ protocol Media {
     var originalLanguage: String { get }
     var originalName: String { get }
 }
+

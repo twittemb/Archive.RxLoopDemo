@@ -8,12 +8,12 @@
 import Foundation
 
 enum MovieListState {
-    case idle
     case loading
     case loaded(movies: [MovieListState.ViewItem])
     case failed
 
     struct ViewItem {
+        let id: Int
         let title: String
         let overview: String
         let posterURL: URL

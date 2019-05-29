@@ -11,6 +11,18 @@ struct DiscoverMovieEndpoint: Endpoint {
     typealias RequestModel = ApiKeyModel
     typealias ResponseModel = DiscoverMovieResponse
 
+    let path: Path = AppPath.discoverMovie
+    let prefixPath = "/3"
+    let httpMethod = HTTPMethod.get
+    let parameterEncoding = ParameterEncoding.url
+    let policy: Policy = AppPolicy.unauthenticated
+}
+
+/// Represents the movie detail endpoint
+struct MovieDetailEndpoint: Endpoint {
+    typealias RequestModel = ApiKeyModel
+    typealias ResponseModel = MovieDetailResponse
+
     let path: Path
     let prefixPath = "/3"
     let httpMethod = HTTPMethod.get
@@ -23,7 +35,7 @@ struct DiscoverTVEndpoint: Endpoint {
     typealias RequestModel = ApiKeyModel
     typealias ResponseModel = DiscoverTVResponse
 
-    let path: Path
+    let path: Path = AppPath.discoverTV
     let prefixPath = "/3"
     let httpMethod = HTTPMethod.get
     let parameterEncoding = ParameterEncoding.url

@@ -9,6 +9,7 @@
 /// The Application's paths
 enum AppPath {
     case discoverMovie
+    case detailMovie(id: Int)
     case discoverTV
 }
 
@@ -18,6 +19,8 @@ extension AppPath: Path {
         switch self {
         case .discoverMovie:
             return "/discover/movie"
+        case .detailMovie(let id):
+            return "/movie/\(id)"
         case .discoverTV:
             return "/discover/tv"
         }

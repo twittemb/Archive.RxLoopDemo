@@ -21,7 +21,15 @@ final class RoutesAssembly: Assembly {
     func assemble(container: Container) {
         container.register(Route<DiscoverMovieEndpoint>.self) { (_) -> Route<DiscoverMovieEndpoint> in
             let route = Route(withBaseUrl: self.baseUrl,
-                              endpoint: DiscoverMovieEndpoint(path: AppPath.discoverMovie),
+                              endpoint: DiscoverMovieEndpoint(),
+                              scheme: .https)
+            route.set(parameter: ApiKeyModel(apiKey: self.apiKey))
+            return route
+        }
+
+        container.register(Route<MovieDetailEndpoint>.self) { (_, movieId: Int) -> Route<MovieDetailEndpoint> in
+            let route = Route(withBaseUrl: self.baseUrl,
+                              endpoint: MovieDetailEndpoint(path: AppPath.detailMovie(id: movieId)),
                               scheme: .https)
             route.set(parameter: ApiKeyModel(apiKey: self.apiKey))
             return route
@@ -29,7 +37,7 @@ final class RoutesAssembly: Assembly {
 
         container.register(Route<DiscoverTVEndpoint>.self) { (_) -> Route<DiscoverTVEndpoint> in
             let route = Route(withBaseUrl: self.baseUrl,
-                              endpoint: DiscoverTVEndpoint(path: AppPath.discoverTV),
+                              endpoint: DiscoverTVEndpoint(),
                               scheme: .https)
             route.set(parameter: ApiKeyModel(apiKey: self.apiKey))
             return route

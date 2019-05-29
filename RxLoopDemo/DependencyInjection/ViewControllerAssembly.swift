@@ -13,5 +13,9 @@ final class ViewControllerAssembly: Assembly {
         container.register(MovieListViewController.self) { _ -> MovieListViewController in
             return MovieListViewController.instantiate()
         }
+
+        container.register(MovieDetailViewController.self) { _ -> MovieDetailViewController in
+            return MovieDetailViewController.instantiate()
+        }
     }
 }

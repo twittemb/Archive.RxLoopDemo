@@ -9,15 +9,15 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxFlow
 import Reusable
 import Alamofire
 import AlamofireImage
 
 final class MovieListViewController: UITableViewController, StoryboardBased {
-
     private let intentSubject = PublishSubject<MovieListIntent>()
-
     private var movieViewItems: [MovieListState.ViewItem] = []
+    let steps = PublishRelay<Step>()
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .gray)
@@ -38,7 +38,7 @@ final class MovieListViewController: UITableViewController, StoryboardBased {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.intentSubject.onNext(.viewLoaded)
+        self.intentSubject.onNext(.viewWillAppear)
     }
 
     func emitIntents (state: Observable<MovieListState>) -> Observable<MovieListIntent> {
@@ -47,8 +47,6 @@ final class MovieListViewController: UITableViewController, StoryboardBased {
 
     func render (state: MovieListState) {
         switch state {
-        case .idle:
-            self.activityIndicator.stopAnimating()
         case .loading:
             self.movieViewItems.removeAll()
             self.activityIndicator.isHidden = false
@@ -104,10 +102,13 @@ final class MovieListViewController: UITableViewController, StoryboardBased {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let movie = self.movies[indexPath.row]
+        let viewItem = self.movieViewItems[indexPath.row]
+        self.movieSelected(withId: viewItem.id)
+    }
+}
 
-//        let movieDetailViewModel = MovieDetailViewModel(with: self.viewModel.injectionContainer, withMovieId: movie.id)
-//        let movieDetailViewController = MovieDetailViewController.instantiate(with: movieDetailViewModel)
-//        self.present(movieDetailViewController, animated: true)
+extension MovieListViewController: Stepper {
+    fileprivate func movieSelected (withId id: Int) {
+        self.steps.accept(AppStep.movieDetail(id: id))
     }
 }
