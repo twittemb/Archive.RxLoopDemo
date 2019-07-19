@@ -10,7 +10,9 @@ import Foundation
 import RxSwift
 
 func movieListUseCase(networkService: NetworkService, route: Route<DiscoverMovieEndpoint>, intents: Observable<MovieListIntent>) -> Observable<MovieListMutation> {
-    return intents.flatMap { (intent) -> Observable<MovieListMutation> in
+    return intents
+        .observeOn(ConcurrentDispatchQueueScheduler(qos: .userInteractive))
+        .flatMap { (intent) -> Observable<MovieListMutation> in
         switch intent {
         case .viewWillAppear:
             return fetchDiscoverMovies(networkService: networkService, route: route)

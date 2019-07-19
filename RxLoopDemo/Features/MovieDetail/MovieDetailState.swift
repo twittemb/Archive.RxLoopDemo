@@ -8,6 +8,7 @@
 import Foundation
 
 enum MovieDetailState {
+    case idle
     case loading
     case loaded (MovieDetailState.ViewItem)
     case failed

@@ -20,7 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FlowAssembly(),
         RoutesAssembly(withBaseUrl: "api.themoviedb.org", apiKey: "3afafd21270fe0414eb760a41f2620eb"),
         ViewControllerAssembly(),
-        ServiceAssembly()
+        ServiceAssembly(),
+        UseCaseAssembly()
         ])
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

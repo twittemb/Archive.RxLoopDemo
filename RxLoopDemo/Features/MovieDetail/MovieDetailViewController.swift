@@ -10,7 +10,6 @@ import UIKit
 import Reusable
 import RxSwift
 import RxCocoa
-import RxFlow
 import Alamofire
 import AlamofireImage
 
@@ -26,48 +25,60 @@ class MovieDetailViewController: UIViewController, StoryboardBased {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     private let intentSubject = PublishSubject<MovieDetailIntent>()
-    let steps = PublishRelay<Step>()
+    let disposeBag = DisposeBag()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.intentSubject.onNext(.viewWillAppear)
     }
 
-    func emitIntents (state: Observable<MovieDetailState>) -> Observable<MovieDetailIntent> {
-        return intentSubject.asObservable()
+    lazy var emitIntents = { [weak self] in
+        return self?.intentSubject.asObservable() ?? .never()
     }
 
-    func render (movieDetailState: MovieDetailState) {
+    lazy var render = { [weak self] (movieDetailState: MovieDetailState) in
         switch movieDetailState {
+        case .idle:
+            self?.activityIndicator.stopAnimating()
+            self?.nameLabel.text = ""
+            self?.overviewTextView.text = ""
+            self?.voteAverageLabel.text = ""
+            self?.popularityLabel.text = ""
+            self?.originalNameLabel.text = ""
+            self?.releaseDateLabel.text = ""
+            self?.posterImageView.image = nil
         case .loading:
-            self.activityIndicator.startAnimating()
+            self?.activityIndicator.startAnimating()
+            self?.nameLabel.text = ""
+            self?.overviewTextView.text = ""
+            self?.voteAverageLabel.text = ""
+            self?.popularityLabel.text = ""
+            self?.originalNameLabel.text = ""
+            self?.releaseDateLabel.text = ""
+            self?.posterImageView.image = nil
         case .loaded(let movie):
             Alamofire.request(movie.posterURL).responseImage { [weak self] (response) in
                 guard response.request?.url == movie.posterURL else { return }
                 guard let data = response.data else { return }
-
+                
                 self?.posterImageView.image = UIImage(data: data)
                 self?.activityIndicator.stopAnimating()
             }
-            self.nameLabel.text = movie.title
-            self.overviewTextView.text = movie.overview
-            self.voteAverageLabel.text = movie.voteAverage
-            self.popularityLabel.text = movie.popularity
-            self.originalNameLabel.text = movie.originalTitle
-            self.releaseDateLabel.text = movie.releaseDate
+            self?.nameLabel.text = movie.title
+            self?.overviewTextView.text = movie.overview
+            self?.voteAverageLabel.text = movie.voteAverage
+            self?.popularityLabel.text = movie.popularity
+            self?.originalNameLabel.text = movie.originalTitle
+            self?.releaseDateLabel.text = movie.releaseDate
         case .failed:
-            self.activityIndicator.stopAnimating()
-            print("Loading has failed")
+            self?.activityIndicator.stopAnimating()
+            self?.nameLabel.text = "Failed loading"
+            self?.overviewTextView.text = "-"
+            self?.voteAverageLabel.text = "-"
+            self?.popularityLabel.text = "-"
+            self?.originalNameLabel.text = "-"
+            self?.releaseDateLabel.text = "-"
+            self?.posterImageView.image = UIImage(named: "failure")!
         }
-    }
-
-    @IBAction func dismiss(_ sender: UIButton) {
-        self.dismiss(animated: true)
-    }
-}
-
-extension MovieDetailViewController: Stepper {
-    func done () {
-        self.steps.accept(AppStep.movieDetailDone)
     }
 }

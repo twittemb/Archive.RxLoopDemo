@@ -19,7 +19,6 @@
 		74B390FD229B7A3300D6D3D9 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B390FB229B7A3300D6D3D9 /* MovieDetailViewController.swift */; };
 		74B390FE229B7A3300D6D3D9 /* MovieDetailViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74B390FC229B7A3300D6D3D9 /* MovieDetailViewController.storyboard */; };
 		74BFA655228E458400190B80 /* RxRelay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA650228E458400190B80 /* RxRelay.framework */; };
-		74BFA656228E458400190B80 /* RxLoop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA651228E458400190B80 /* RxLoop.framework */; };
 		74BFA657228E458400190B80 /* RxFlow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA652228E458400190B80 /* RxFlow.framework */; };
 		74BFA658228E458400190B80 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA653228E458400190B80 /* RxSwift.framework */; };
 		74BFA659228E458400190B80 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA654228E458400190B80 /* RxCocoa.framework */; };
@@ -59,6 +58,7 @@
 		74BFA6AE2292F02200190B80 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA6AB2292F02200190B80 /* Alamofire.framework */; };
 		74BFA6B02292F04F00190B80 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA6AF2292F04F00190B80 /* Swinject.framework */; };
 		74BFA6B22292F3BD00190B80 /* ApiKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BFA6B12292F3BD00190B80 /* ApiKeyModel.swift */; };
+		74C2E89C22C026E400051245 /* UseCaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C2E89B22C026E400051245 /* UseCaseAssembly.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +116,7 @@
 		74BFA6AB2292F02200190B80 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		74BFA6AF2292F04F00190B80 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
 		74BFA6B12292F3BD00190B80 /* ApiKeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyModel.swift; sourceTree = "<group>"; };
+		74C2E89B22C026E400051245 /* UseCaseAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseAssembly.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,7 +130,6 @@
 				74BFA6B02292F04F00190B80 /* Swinject.framework in Frameworks */,
 				74BFA659228E458400190B80 /* RxCocoa.framework in Frameworks */,
 				74BFA657228E458400190B80 /* RxFlow.framework in Frameworks */,
-				74BFA656228E458400190B80 /* RxLoop.framework in Frameworks */,
 				74BFA655228E458400190B80 /* RxRelay.framework in Frameworks */,
 				74BFA658228E458400190B80 /* RxSwift.framework in Frameworks */,
 			);
@@ -272,6 +272,7 @@
 				74BFA680229073B400190B80 /* RoutesAssembly.swift */,
 				74BFA6A12292128800190B80 /* ServiceAssembly.swift */,
 				74BFA69F22920FC700190B80 /* ViewControllerAssembly.swift */,
+				74C2E89B22C026E400051245 /* UseCaseAssembly.swift */,
 			);
 			path = DependencyInjection;
 			sourceTree = "<group>";
@@ -407,7 +408,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxFlow.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RxLoop.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireImage.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework",
@@ -421,7 +421,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxSwift.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxCocoa.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxFlow.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxLoop.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AlamofireImage.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RxRelay.framework",
@@ -452,6 +451,7 @@
 				74BFA67D228E490900190B80 /* DiscoverTVResponse.swift in Sources */,
 				74BFA67E228E490900190B80 /* Media.swift in Sources */,
 				74B390FD229B7A3300D6D3D9 /* MovieDetailViewController.swift in Sources */,
+				74C2E89C22C026E400051245 /* UseCaseAssembly.swift in Sources */,
 				74BFA670228E479900190B80 /* AlamofireNetworkService.swift in Sources */,
 				74BFA67C228E490900190B80 /* DiscoverMovieResponse.swift in Sources */,
 				74BFA6932290791500190B80 /* MovieListReducer.swift in Sources */,

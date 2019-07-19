@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Eo-un-Uc1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6Eo-un-Uc1">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Movie Detail View Controller-->
         <scene sceneID="mO6-K2-rma">
             <objects>
-                <viewController id="6Eo-un-Uc1" customClass="MovieDetailViewController" customModule="RxReduceDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6Eo-un-Uc1" customClass="MovieDetailViewController" customModule="RxLoopDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="U4J-aF-3zr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -104,15 +105,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Aw-eO-k4h">
-                                <rect key="frame" x="160" y="617" width="54" height="30"/>
-                                <state key="normal" title="Dismiss"/>
-                                <connections>
-                                    <action selector="dismiss:" destination="6Eo-un-Uc1" eventType="touchUpInside" id="Oc7-LA-J8p"/>
-                                </connections>
-                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="DP8-Nr-n6O">
-                                <rect key="frame" x="177" y="120" width="20" height="20"/>
+                                <rect key="frame" x="177.5" y="333.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -120,6 +114,7 @@
                             <constraint firstItem="q17-yC-KQU" firstAttribute="leading" secondItem="Ru1-E7-uMG" secondAttribute="leading" id="6Dr-Zu-6JP"/>
                             <constraint firstItem="Mgl-2j-fIX" firstAttribute="leading" secondItem="Dda-Ct-cxM" secondAttribute="leading" id="6o1-cf-pC8"/>
                             <constraint firstItem="rXS-ir-3sn" firstAttribute="bottom" secondItem="Cmg-4R-vsJ" secondAttribute="bottom" id="7vx-hz-lmJ"/>
+                            <constraint firstItem="DP8-Nr-n6O" firstAttribute="centerY" secondItem="FSB-52-Sas" secondAttribute="centerY" id="82b-US-9FY"/>
                             <constraint firstItem="G2X-eY-vLe" firstAttribute="leading" secondItem="q17-yC-KQU" secondAttribute="leading" id="AMv-zp-zey"/>
                             <constraint firstAttribute="top" secondItem="Cmg-4R-vsJ" secondAttribute="top" constant="20" id="CNy-1g-TSI"/>
                             <constraint firstItem="Ru1-E7-uMG" firstAttribute="trailing" secondItem="Cmg-4R-vsJ" secondAttribute="trailing" constant="-16" id="CPT-bD-shi"/>
@@ -127,9 +122,9 @@
                             <constraint firstItem="q17-yC-KQU" firstAttribute="top" secondItem="Cmg-4R-vsJ" secondAttribute="bottom" constant="8" id="Fm9-Tp-tpw"/>
                             <constraint firstItem="xHz-1y-CiW" firstAttribute="leading" secondItem="G2X-eY-vLe" secondAttribute="leading" constant="8" id="Fu4-sF-vVG"/>
                             <constraint firstItem="xHz-1y-CiW" firstAttribute="top" secondItem="G2X-eY-vLe" secondAttribute="bottom" constant="8" id="Id9-dL-FDF"/>
-                            <constraint firstItem="DP8-Nr-n6O" firstAttribute="centerY" secondItem="Cmg-4R-vsJ" secondAttribute="centerY" id="JFp-T2-hym"/>
                             <constraint firstItem="xDJ-bn-rYO" firstAttribute="leading" secondItem="xHz-1y-CiW" secondAttribute="leading" id="Jwa-3B-MwY"/>
                             <constraint firstItem="T8m-zS-h2N" firstAttribute="top" secondItem="Dda-Ct-cxM" secondAttribute="bottom" constant="8" id="NnA-Ks-SSy"/>
+                            <constraint firstItem="DP8-Nr-n6O" firstAttribute="centerX" secondItem="FSB-52-Sas" secondAttribute="centerX" id="S6P-TI-zve"/>
                             <constraint firstAttribute="trailing" secondItem="Cmg-4R-vsJ" secondAttribute="trailing" id="UsF-HB-XmD"/>
                             <constraint firstItem="T8m-zS-h2N" firstAttribute="leading" secondItem="xDJ-bn-rYO" secondAttribute="leading" id="WJU-Mi-Ws4"/>
                             <constraint firstAttribute="trailing" secondItem="fq8-vq-2uk" secondAttribute="trailing" constant="16" id="XPI-rz-NcI"/>
@@ -142,16 +137,14 @@
                             <constraint firstItem="G2X-eY-vLe" firstAttribute="top" secondItem="fq8-vq-2uk" secondAttribute="bottom" constant="8" id="dZd-Lh-NlL"/>
                             <constraint firstItem="Dda-Ct-cxM" firstAttribute="leading" secondItem="f2U-Dx-oXz" secondAttribute="leading" id="eDi-mq-FHf"/>
                             <constraint firstItem="xDJ-bn-rYO" firstAttribute="top" secondItem="f2U-Dx-oXz" secondAttribute="bottom" constant="8" id="fM1-n6-iA7"/>
-                            <constraint firstAttribute="bottom" secondItem="5Aw-eO-k4h" secondAttribute="bottom" constant="20" id="g94-uR-Gy6"/>
                             <constraint firstItem="Mox-Yd-NZn" firstAttribute="leading" secondItem="T8m-zS-h2N" secondAttribute="leading" id="l2C-XA-a7p"/>
                             <constraint firstItem="Dda-Ct-cxM" firstAttribute="top" secondItem="xDJ-bn-rYO" secondAttribute="bottom" constant="8" id="qyK-JF-Xeb"/>
                             <constraint firstItem="Ru1-E7-uMG" firstAttribute="bottom" secondItem="Cmg-4R-vsJ" secondAttribute="bottom" constant="-16" id="r0L-cl-mEz"/>
                             <constraint firstItem="Mox-Yd-NZn" firstAttribute="top" secondItem="Mgl-2j-fIX" secondAttribute="bottom" constant="8" id="rgS-8w-qeo"/>
-                            <constraint firstItem="5Aw-eO-k4h" firstAttribute="centerX" secondItem="U4J-aF-3zr" secondAttribute="centerX" id="ujg-61-Hvz"/>
                             <constraint firstItem="fq8-vq-2uk" firstAttribute="top" secondItem="q17-yC-KQU" secondAttribute="bottom" constant="8" id="wFM-T8-NCf"/>
-                            <constraint firstItem="DP8-Nr-n6O" firstAttribute="centerX" secondItem="U4J-aF-3zr" secondAttribute="centerX" id="xqF-Os-uBF"/>
                             <constraint firstItem="Mgl-2j-fIX" firstAttribute="top" secondItem="T8m-zS-h2N" secondAttribute="bottom" constant="8" id="y5P-1A-2MT"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="FSB-52-Sas"/>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="DP8-Nr-n6O" id="g7V-Qd-J1d"/>

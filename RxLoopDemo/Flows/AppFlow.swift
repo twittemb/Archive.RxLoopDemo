@@ -28,6 +28,8 @@ final class AppFlow: Flow {
         self.resolver = resolver
     }
 
+    private let disposeBag = DisposeBag()
+
     func navigate(to step: Step) -> FlowContributors {
         switch step {
         case AppStep.movieList:
@@ -45,17 +47,18 @@ final class AppFlow: Flow {
     private func navigateToMovieList () -> FlowContributors {
         // dependencies resolution
         let viewController = self.resolver.resolve(MovieListViewController.self)!
-        let networkService = self.resolver.resolve(NetworkService.self)!
-        let route = self.resolver.resolve(Route<DiscoverMovieEndpoint>.self)!
+        let useCaseMutationEmitter = self.resolver.resolve(UseCaseMutationEmitter<MovieListIntent, MovieListMutation>.self)!
 
         // loop definition
-        let useCaseMutationEmitter = curry(f3: movieListUseCase)(networkService)(route)
-        let mutationEmitter = compose(f1: viewController.emitIntents, f2: useCaseMutationEmitter)
+        let movieListLoop = loop(mutationEmitter: compose(f1: viewController.emitIntents, f2: useCaseMutationEmitter),
+                                 reducer: movieListReducer,
+                                 interpreter: viewController.render,
+                                 interpretationScheduler: MainScheduler.instance)
 
-        let movieListLoop = loop(mutationEmitter: mutationEmitter, reducer: movieListReducer)
-        _ = movieListLoop(.loading, viewController.render)
+        // loop runtime
+        _ = movieListLoop
             .take(until: viewController.rx.deallocating)
-            .start()
+            .start(with: .idle)
 
         // view presentation
         self.rootViewController.pushViewController(viewController, animated: true)
@@ -65,25 +68,26 @@ final class AppFlow: Flow {
     }
 
     private func navigateToMovieDetail (with id: Int) -> FlowContributors {
-        print (id)
         // dependencies resolution
         let viewController = self.resolver.resolve(MovieDetailViewController.self)!
-        let networkService = self.resolver.resolve(NetworkService.self)!
-        let route = self.resolver.resolve(Route<MovieDetailEndpoint>.self, argument: id)!
+        let useCaseMutationEmitter = self.resolver.resolve(UseCaseMutationEmitter<MovieDetailIntent, MovieDetailMutation>.self, argument: id)!
 
         // loop definition
-        let useCaseMutationEmitter = curry(f3: movieDetailUseCase)(networkService)(route)
-        let mutationEmitter = compose(f1: viewController.emitIntents, f2: useCaseMutationEmitter)
 
-        let movieListLoop = loop(mutationEmitter: mutationEmitter, reducer: movieDetailReducer)
-        _ = movieListLoop(.loading, viewController.render)
+        let movieDetailLoop = loop(mutationEmitter: compose(f1: viewController.emitIntents, f2: useCaseMutationEmitter),
+                                   reducer: movieDetailReducer,
+                                   interpreter: viewController.render,
+                                   interpretationScheduler: MainScheduler.instance)
+
+        // loop runtime
+        _ = movieDetailLoop
             .take(until: viewController.rx.deallocating)
-            .start()
+            .start(with: .idle)
 
         // view presentation
-        self.rootViewController.present(viewController, animated: true)
+        self.rootViewController.pushViewController(viewController, animated: true)
 
         // flow coordinator contribution
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController))
+        return .none
     }
 }

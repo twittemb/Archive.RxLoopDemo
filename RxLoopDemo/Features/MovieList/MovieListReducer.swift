@@ -8,16 +8,13 @@
 
 import RxSwift
 
-func movieListReducer (stateAndMutation: Observable<(MovieListMutation, MovieListState)>) -> Observable<MovieListState> {
-
-    return stateAndMutation.map {
-        switch $0 {
-        case (.startLoad, _):
-            return .loading
-        case (.load(let movies), .loading):
-            return .loaded(movies: movies)
-        default:
-            return .failed
-        }
+func movieListReducer (state: MovieListState, mutation: MovieListMutation) -> MovieListState {
+    switch (state, mutation) {
+    case (_, .startLoad):
+        return .loading
+    case (.loading, .load(let movies)):
+        return .loaded(movies: movies)
+    default:
+        return .failed
     }
 }

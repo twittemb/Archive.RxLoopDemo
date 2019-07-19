@@ -18,6 +18,7 @@ final class MovieListViewController: UITableViewController, StoryboardBased {
     private let intentSubject = PublishSubject<MovieListIntent>()
     private var movieViewItems: [MovieListState.ViewItem] = []
     let steps = PublishRelay<Step>()
+    let disposeBag = DisposeBag()
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .gray)
@@ -31,22 +32,25 @@ final class MovieListViewController: UITableViewController, StoryboardBased {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.clearsSelectionOnViewWillAppear = false
         self.tableView.register(cellType: MovieListViewCell.self)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.intentSubject.onNext(.viewWillAppear)
     }
 
-    func emitIntents (state: Observable<MovieListState>) -> Observable<MovieListIntent> {
-        return intentSubject.asObservable()
+    lazy var emitIntents = { [weak self] in
+        return self?.intentSubject.asObservable() ?? .never()
     }
 
     func render (state: MovieListState) {
         switch state {
+        case .idle:
+            self.movieViewItems.removeAll()
+            self.activityIndicator.isHidden = true
+            self.activityIndicator.stopAnimating()
         case .loading:
             self.movieViewItems.removeAll()
             self.activityIndicator.isHidden = false
