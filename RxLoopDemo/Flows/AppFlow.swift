@@ -49,14 +49,13 @@ final class AppFlow: Flow {
         let viewController = self.resolver.resolve(MovieListViewController.self)!
         let useCaseMutationEmitter = self.resolver.resolve(UseCaseMutationEmitter<MovieListIntent, MovieListMutation>.self)!
 
-        // loop definition
-        let movieListLoop = loop(mutationEmitter: compose(f1: viewController.emitIntents, f2: useCaseMutationEmitter),
-                                 reducer: movieListReducer,
-                                 interpreter: viewController.render,
-                                 interpretationScheduler: MainScheduler.instance)
-
-        // loop runtime
-        _ = movieListLoop
+        // loop wiring
+        LoopBuilder
+            .mutates(with: viewController.emitIntents)
+            .compose(withNextMutationEmitter: useCaseMutationEmitter)
+            .reduces(with: movieListReducer)
+            .interprets(with: viewController.render)
+            .interpret(on: MainScheduler.instance)
             .take(until: viewController.rx.deallocating)
             .start(with: .idle)
 
@@ -72,15 +71,13 @@ final class AppFlow: Flow {
         let viewController = self.resolver.resolve(MovieDetailViewController.self)!
         let useCaseMutationEmitter = self.resolver.resolve(UseCaseMutationEmitter<MovieDetailIntent, MovieDetailMutation>.self, argument: id)!
 
-        // loop definition
-
-        let movieDetailLoop = loop(mutationEmitter: compose(f1: viewController.emitIntents, f2: useCaseMutationEmitter),
-                                   reducer: movieDetailReducer,
-                                   interpreter: viewController.render,
-                                   interpretationScheduler: MainScheduler.instance)
-
-        // loop runtime
-        _ = movieDetailLoop
+        // loop wiring
+        LoopBuilder
+            .mutates(with: viewController.emitIntents)
+            .compose(withNextMutationEmitter: useCaseMutationEmitter)
+            .reduces(with: movieDetailReducer)
+            .interprets(with: viewController.render)
+            .interpret(on: MainScheduler.instance)
             .take(until: viewController.rx.deallocating)
             .start(with: .idle)
 

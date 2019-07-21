@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7401F1D9229E10F200C0F271 /* MovieDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7401F1D8229E10F200C0F271 /* MovieDetailResponse.swift */; };
-		748A310922E2179B007FBF01 /* RxLoop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA651228E458400190B80 /* RxLoop.framework */; };
+		749CA5E622E4E2BE0050D0AF /* RxLoop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74BFA651228E458400190B80 /* RxLoop.framework */; };
 		74ADFBC7228E3E7F00DABB85 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74ADFBC6228E3E7F00DABB85 /* AppDelegate.swift */; };
 		74ADFBCE228E3E8000DABB85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74ADFBCD228E3E8000DABB85 /* Assets.xcassets */; };
 		74ADFBD1228E3E8000DABB85 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74ADFBCF228E3E8000DABB85 /* LaunchScreen.storyboard */; };
@@ -130,8 +130,8 @@
 				74BFA6AC2292F02200190B80 /* Reusable.framework in Frameworks */,
 				74BFA6B02292F04F00190B80 /* Swinject.framework in Frameworks */,
 				74BFA659228E458400190B80 /* RxCocoa.framework in Frameworks */,
+				749CA5E622E4E2BE0050D0AF /* RxLoop.framework in Frameworks */,
 				74BFA657228E458400190B80 /* RxFlow.framework in Frameworks */,
-				748A310922E2179B007FBF01 /* RxLoop.framework in Frameworks */,
 				74BFA655228E458400190B80 /* RxRelay.framework in Frameworks */,
 				74BFA658228E458400190B80 /* RxSwift.framework in Frameworks */,
 			);
