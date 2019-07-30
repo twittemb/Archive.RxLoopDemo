@@ -51,13 +51,12 @@ final class AppFlow: Flow {
 
         // loop wiring
         LoopBuilder
-            .mutates(with: viewController.emitIntents)
-            .compose(withNextMutationEmitter: useCaseMutationEmitter)
-            .reduces(with: movieListReducer)
-            .interprets(with: viewController.render)
-            .interpret(on: MainScheduler.instance)
-            .take(until: viewController.rx.deallocating)
-            .start(with: .idle)
+            .from(viewController.emitIntents)
+            .compose(with: useCaseMutationEmitter)
+            .scan(initialState: .idle, with: movieListReducer)
+            .consume(by: viewController.render, on: MainScheduler.instance)
+            .build()
+            .disposed(by: viewController.disposeBag)
 
         // view presentation
         self.rootViewController.pushViewController(viewController, animated: true)
@@ -73,13 +72,12 @@ final class AppFlow: Flow {
 
         // loop wiring
         LoopBuilder
-            .mutates(with: viewController.emitIntents)
-            .compose(withNextMutationEmitter: useCaseMutationEmitter)
-            .reduces(with: movieDetailReducer)
-            .interprets(with: viewController.render)
-            .interpret(on: MainScheduler.instance)
-            .take(until: viewController.rx.deallocating)
-            .start(with: .idle)
+            .from(viewController.emitIntents)
+            .compose(with: useCaseMutationEmitter)
+            .scan(initialState: .idle, with: movieDetailReducer)
+            .consume(by: viewController.render, on: MainScheduler.instance)
+            .build()
+            .disposed(by: viewController.disposeBag)
 
         // view presentation
         self.rootViewController.pushViewController(viewController, animated: true)
